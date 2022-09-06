@@ -14,8 +14,8 @@ router.post('/', async (req, res) => {
         username,
         password: hashCode,
       },
-    });
-res.status(201).json({ user: userCreated })
+    })
+  res.status(201).json({ user: userCreated })
 });
 
 module.exports = router;
