@@ -13,11 +13,15 @@ router.post('/', async (req, res) => {
           username,
         },
       });
+
+      if (userInDb === null) {
+        return res.status(400).json({ error: "Incorrect Credentials."});
+      }
         
     const userPassword = await bcrypt.compare(password, userInDb.password);
 
       if (!userInDb || !userPassword) {
-        return res.status(404).json({ error: "Incorrect Credentials." });
+        return res.status(400).json({ error: "Incorrect Credentials." });
       }
     
     const token = jwt.sign({ username }, process.env.JWT_SECRET);
